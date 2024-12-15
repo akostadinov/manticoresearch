@@ -14,6 +14,8 @@ set ( CMAKE_ENABLE_EXPORTS ON )
 
 set ( _CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE} )
 
+set(UNALIGNED_RAM_ACCESS_EXITCODE "0")
+
 PROJECT ( MANTICORE )
 
 # sometimes CMAKE_BUILD_TYPE became set after PROJECT statement, undo it.
