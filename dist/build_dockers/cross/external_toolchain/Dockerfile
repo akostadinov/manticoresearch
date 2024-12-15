@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y \
     flex \
     curl \
     software-properties-common \
+    libssl-dev \
 && rm -rf /var/lib/apt/lists/*
 
 # 2-nd layer, llvm
@@ -46,9 +47,9 @@ RUN apt-get update && apt-get install -y \
 # 4-th layer, cmake
 ENV cmakever="3.26.3"
 RUN cd / \
-&& export arch=$(uname -m) \
-&& curl -L https://github.com/Kitware/CMake/releases/download/v$cmakever/cmake-$cmakever-linux-$arch.tar.gz | tar -zx
-ENV PATH $PATH:/cmake-$cmakever-linux-x86_64/bin:/cmake-$cmakever-linux-aarch64/bin
+&& export CXX=clang++-16 \
+&& curl -L https://github.com/Kitware/CMake/releases/download/v$cmakever/cmake-$cmakever.tar.gz | tar -zx \
+&& cd cmake-$cmakever && ./bootstrap && make && make install
 
 # 5-th layer. Everything to build, except actual sysroot archives
 ENV CMAKE_GENERATOR=Ninja
