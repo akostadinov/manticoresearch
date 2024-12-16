@@ -4,7 +4,7 @@
 # nothing required to defined; file runs from host context
 # That is final step (m.b. not necessary in general)
 
-arch=$(uname -m)
+arch=s390x
 
 cd $arch
 echo "pack archives"
